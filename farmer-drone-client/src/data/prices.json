@@ -1,0 +1,203 @@
+[
+  {
+    "crop": "wheat",
+    "nameKey": "wheat",
+    "unit": "quintal",
+    "todayPrice": 2530,
+    "yesterdayPrice": 2480,
+    "trend": "down",
+    "yieldPerAcre": 16,
+    "note": "Price falling slightly"
+  },
+  {
+    "crop": "paddy",
+    "nameKey": "paddy",
+    "unit": "quintal",
+    "todayPrice": 2250,
+    "yesterdayPrice": 2300,
+    "trend": "down",
+    "yieldPerAcre": 20,
+    "note": "Near MSP-linked market price"
+  },
+  {
+    "crop": "mustard",
+    "nameKey": "mustard",
+    "unit": "quintal",
+    "todayPrice": 6430,
+    "yesterdayPrice": 6300,
+    "trend": "up",
+    "yieldPerAcre": 8,
+    "note": "Good time to sell"
+  },
+  {
+    "crop": "cotton",
+    "nameKey": "cotton",
+    "unit": "quintal",
+    "todayPrice": 6860,
+    "yesterdayPrice": 6650,
+    "trend": "up",
+    "yieldPerAcre": 10,
+    "note": "Export demand pushing prices up"
+  },
+  {
+    "crop": "maize",
+    "nameKey": "maize",
+    "unit": "quintal",
+    "todayPrice": 2090,
+    "yesterdayPrice": 2080,
+    "trend": "steady",
+    "yieldPerAcre": 25,
+    "note": "Poultry feed demand strong"
+  },
+  {
+    "crop": "soybean",
+    "nameKey": "soybean",
+    "unit": "quintal",
+    "todayPrice": 4470,
+    "yesterdayPrice": 4450,
+    "trend": "up",
+    "yieldPerAcre": 8,
+    "note": "Import pressure easing"
+  },
+  {
+    "crop": "sugarcane",
+    "nameKey": "sugarcane",
+    "unit": "quintal",
+    "todayPrice": 350,
+    "yesterdayPrice": 350,
+    "trend": "steady",
+    "yieldPerAcre": 320,
+    "note": "Government SAP fixed price"
+  },
+  {
+    "crop": "gram",
+    "nameKey": "gram",
+    "unit": "quintal",
+    "todayPrice": 5400,
+    "yesterdayPrice": 5300,
+    "trend": "up",
+    "yieldPerAcre": 7,
+    "note": "Pulse prices rising due to low stock"
+  },
+  {
+    "crop": "sunflower",
+    "nameKey": "sunflower",
+    "unit": "quintal",
+    "todayPrice": 6200,
+    "yesterdayPrice": 6150,
+    "trend": "up",
+    "yieldPerAcre": 6,
+    "note": "Edible oil demand supporting prices"
+  },
+  {
+    "crop": "jowar",
+    "nameKey": "jowar",
+    "unit": "quintal",
+    "todayPrice": 3100,
+    "yesterdayPrice": 3050,
+    "trend": "up",
+    "yieldPerAcre": 10,
+    "note": "Millet demand increasing"
+  },
+  {
+    "crop": "bajra",
+    "nameKey": "bajra",
+    "unit": "quintal",
+    "todayPrice": 2500,
+    "yesterdayPrice": 2480,
+    "trend": "steady",
+    "yieldPerAcre": 12,
+    "note": "Stable demand from feed industry"
+  },
+  {
+    "crop": "arhar",
+    "nameKey": "arhar",
+    "unit": "quintal",
+    "todayPrice": 7200,
+    "yesterdayPrice": 7100,
+    "trend": "up",
+    "yieldPerAcre": 6,
+    "note": "Toor dal shortage pushing prices"
+  },
+  {
+    "crop": "moong",
+    "nameKey": "moong",
+    "unit": "quintal",
+    "todayPrice": 8000,
+    "yesterdayPrice": 7950,
+    "trend": "up",
+    "yieldPerAcre": 5,
+    "note": "High demand, low arrival at mandi"
+  },
+  {
+    "crop": "urad",
+    "nameKey": "urad",
+    "unit": "quintal",
+    "todayPrice": 7500,
+    "yesterdayPrice": 7600,
+    "trend": "down",
+    "yieldPerAcre": 5,
+    "note": "Imports keeping prices in check"
+  },
+  {
+    "crop": "groundnut",
+    "nameKey": "groundnut",
+    "unit": "quintal",
+    "todayPrice": 5800,
+    "yesterdayPrice": 5750,
+    "trend": "up",
+    "yieldPerAcre": 12,
+    "note": "Oil crushing demand strong"
+  },
+  {
+    "crop": "turmeric",
+    "nameKey": "turmeric",
+    "unit": "quintal",
+    "todayPrice": 14500,
+    "yesterdayPrice": 14200,
+    "trend": "up",
+    "yieldPerAcre": 25,
+    "note": "Export demand from Middle East"
+  },
+  {
+    "crop": "onion",
+    "nameKey": "onion",
+    "unit": "quintal",
+    "todayPrice": 1800,
+    "yesterdayPrice": 2100,
+    "trend": "down",
+    "yieldPerAcre": 80,
+    "note": "New arrivals pushing prices down"
+  },
+  {
+    "crop": "potato",
+    "nameKey": "potato",
+    "unit": "quintal",
+    "todayPrice": 1200,
+    "yesterdayPrice": 1150,
+    "trend": "up",
+    "yieldPerAcre": 100,
+    "note": "Cold storage stock depleting"
+  },
+  {
+    "crop": "tomato",
+    "nameKey": "tomato",
+    "unit": "quintal",
+    "todayPrice": 2200,
+    "yesterdayPrice": 2500,
+    "trend": "down",
+    "yieldPerAcre": 120,
+    "note": "Seasonal glut in market"
+  },
+  {
+    "crop": "garlic",
+    "nameKey": "garlic",
+    "unit": "quintal",
+    "todayPrice": 12000,
+    "yesterdayPrice": 11500,
+    "trend": "up",
+    "yieldPerAcre": 40,
+    "note": "Low production this season"
+  }
+]
+

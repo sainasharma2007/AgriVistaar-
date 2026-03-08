@@ -1,0 +1,14 @@
+{
+  "features": [
+    "price_anomaly",
+    "ownership_velocity",
+    "hash_validity",
+    "scan_frequency",
+    "area_price_ratio",
+    "location_consistency",
+    "request_time_pattern",
+    "repeat_flag"
+  ],
+  "n_features": 8,
+  "version": "v3"
+}
