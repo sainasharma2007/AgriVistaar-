@@ -3,26 +3,41 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
+    auth0Id: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+
     name: {
       type: String,
-      required: true,
       trim: true,
+      default: "",
     },
 
     email: {
       type: String,
-      required: true,
       unique: true,
+      sparse: true,
       lowercase: true,
       trim: true,
+      default: "",
     },
 
     password: {
       type: String,
-      required: true,
+      default: null,  // ✅ no longer required
     },
 
     phone: {
+      type: String,
+    },
+
+    district: {
+      type: String,
+    },
+
+    state: {
       type: String,
     },
 

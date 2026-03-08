@@ -2,6 +2,30 @@ const jwksRsa = require("jwks-rsa");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+const client = jwksRsa({
+  jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
+  cache: true,
+  rateLimit: true,
+});
+
+const getKey = (header, callback) => {
+  // ✅ If no kid, fetch first key from JWKS
+  if (!header.kid) {
+    client.getKeys((err, keys) => {
+      if (err || !keys || keys.length === 0) {
+        return callback(new Error("No keys found"));
+      }
+      const key = keys[0];
+      callback(null, key.getPublicKey ? key.getPublicKey() : key.rsaPublicKey);
+    });
+  } else {
+    client.getSigningKey(header.kid, (err, key) => {
+      if (err) return callback(err);
+      callback(null, key.getPublicKey ? key.getPublicKey() : key.rsaPublicKey);
+    });
+  }
+};
+
 const auth = [
   (req, res, next) => {
     const header = req.headers.authorization;
@@ -10,17 +34,6 @@ const auth = [
     }
 
     const token = header.split(" ")[1];
-
-    const client = jwksRsa({
-      jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
-    });
-
-    const getKey = (header, callback) => {
-      client.getSigningKey(header.kid, (err, key) => {
-        if (err) return callback(err);
-        callback(null, key.getPublicKey());
-      });
-    };
 
     jwt.verify(
       token,
@@ -45,10 +58,8 @@ const auth = [
       const auth0Id = req.auth.payload.sub;
       const email = req.auth.payload.email || "";
 
-      // 1. Try find by auth0Id first
       let user = await User.findOne({ auth0Id });
 
-      // 2. If not found, try find by email and link auth0Id
       if (!user && email) {
         user = await User.findOneAndUpdate(
           { email },
@@ -57,7 +68,6 @@ const auth = [
         );
       }
 
-      // 3. If still not found, create new user
       if (!user) {
         user = await User.create({
           auth0Id,
