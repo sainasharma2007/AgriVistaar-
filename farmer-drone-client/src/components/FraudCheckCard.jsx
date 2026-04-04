@@ -125,16 +125,14 @@ const FraudCheckCard = ({ droneJobId, fieldId, language = "en" }) => {
 
   const tx = FRAUD_TEXT[language] || FRAUD_TEXT.en;
 
+  // ✅ FIX: Removed manual localStorage token fetch.
+  // api instance already has the Bearer token injected globally via
+  // setAuthToken() called in App.jsx after Auth0 login.
   const runFraudCheck = async () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("authToken");
-      const res = await api.post(
-        "/api/ai/detect-fraud",
-        { droneJobId, fieldId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await api.post("/api/fraud/detect-fraud", { droneJobId, fieldId });
       setResult(res.data);
     } catch (err) {
       setError(err?.response?.data?.message || "Fraud check failed. Try again.");

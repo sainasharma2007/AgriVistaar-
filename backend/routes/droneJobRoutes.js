@@ -1,7 +1,5 @@
-
-
 // backend/routes/droneJobRoutes.js
-const express = require("express");
+const express  = require("express");
 const DroneJob = require("../models/DroneJob");
 const { auth } = require("../middleware/auth");
 
@@ -14,8 +12,8 @@ router.post("/", auth, async (req, res) => {
     if (!fieldId) return res.status(400).json({ message: "fieldId is required" });
 
     const job = await DroneJob.create({
-      field: fieldId,
-      farmer: req.user._id,
+      field:         fieldId,
+      farmer:        req.user._id,
       stage,
       preferredDate,
       notes,
@@ -33,6 +31,7 @@ router.get("/my", auth, async (req, res) => {
   try {
     const jobs = await DroneJob.find({ farmer: req.user._id })
       .populate("field", "name cropType village district")
+      .populate("aiAnalysisId") // ✅ full CNN crop analysis data saath aayega
       .sort({ createdAt: -1 });
 
     res.json({ jobs });
@@ -46,9 +45,11 @@ router.get("/my", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const job = await DroneJob.findOne({
-      _id: req.params.id,
+      _id:    req.params.id,
       farmer: req.user._id,
-    }).populate("field", "name cropType village district");
+    })
+      .populate("field", "name cropType village district")
+      .populate("aiAnalysisId"); // ✅ single job fetch mein bhi populate
 
     if (!job) return res.status(404).json({ message: "Job not found" });
 
@@ -62,14 +63,15 @@ router.get("/:id", auth, async (req, res) => {
 // PATCH /api/drone-jobs/:id
 router.patch("/:id", auth, async (req, res) => {
   try {
-    const { status, imageUrl, analysis,aiAnalysisId, cropHealthStatus, fraudRiskScore } = req.body;
+    const { status, imageUrl, analysis, aiAnalysisId, cropHealthStatus, fraudRiskScore } = req.body;
     const updateData = {};
-    if (status) updateData.status = status;
-    if (imageUrl) updateData.imageUrl = imageUrl;
-    if (analysis) updateData.analysis = analysis;
-if (aiAnalysisId)     updateData.aiAnalysisId = aiAnalysisId;
-if (cropHealthStatus) updateData.cropHealthStatus = cropHealthStatus;
-if (fraudRiskScore !== undefined) updateData.fraudRiskScore = fraudRiskScore;
+    if (status)                      updateData.status           = status;
+    if (imageUrl)                    updateData.imageUrl         = imageUrl;
+    if (analysis)                    updateData.analysis         = analysis;
+    if (aiAnalysisId)                updateData.aiAnalysisId     = aiAnalysisId;
+    if (cropHealthStatus)            updateData.cropHealthStatus = cropHealthStatus;
+    if (fraudRiskScore !== undefined) updateData.fraudRiskScore  = fraudRiskScore;
+
     const job = await DroneJob.findByIdAndUpdate(req.params.id, updateData, { new: true })
       .populate("field", "name cropType");
 
@@ -82,11 +84,11 @@ if (fraudRiskScore !== undefined) updateData.fraudRiskScore = fraudRiskScore;
   }
 });
 
-// DELETE /api/drone-jobs/:id  ← NEW
+// DELETE /api/drone-jobs/:id
 router.delete("/:id", auth, async (req, res) => {
   try {
     const job = await DroneJob.findOneAndDelete({
-      _id: req.params.id,
+      _id:    req.params.id,
       farmer: req.user._id, // sirf apna scan delete kar sakta hai
     });
 

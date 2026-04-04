@@ -35,7 +35,13 @@ router.post("/start", auth, async (req, res) => {
       farmerId:        req.user._id.toString(),
       farmCoordinates: farmCoordinates || { lat: 28.6139, lng: 77.2090 },
       farmSizeAcres:   farmSizeAcres   || 5,
-    }).catch(err => console.log("[Drone] Flask trigger error:", err.message));
+    }).catch(err => {
+      if (err.response && err.response.status === 404) {
+        console.log("[Drone] Notice: Member 4's Flask Simulator endpoint /drone/run is currently offline or missing (404). Simulation continuing in mock mode.");
+      } else {
+        console.log("[Drone] Flask trigger error:", err.message);
+      }
+    });
 
     res.json({
       success:      true,

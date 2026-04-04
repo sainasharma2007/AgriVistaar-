@@ -5,7 +5,8 @@ import { useLanguage } from "../context/LanguageContext";
 // ══════════════════════════════════════════════
 // Gemini API Configuration
 // ══════════════════════════════════════════════
-const API_KEY = "AIzaSyBOTxlK7PdmaMEfHq5XLd6-j2eyhDylfwQ";
+
+const API_KEY = "AIzaSyBtMMSyEcEWFzJxNHnDAyadK7y8s4aH2sg";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const LANG_NAMES = {
@@ -107,7 +108,7 @@ const TypingDots = () => (
     {[0, 1, 2].map((i) => (
       <span
         key={i}
-        className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"
+        className="w-2 h-2 bg-green-500 rounded-full animate-bounce"
         style={{ animationDelay: `${i * 0.15}s` }}
       />
     ))}
@@ -119,15 +120,15 @@ const Bubble = ({ msg }) => {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-3`}>
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-sm mr-2 flex-shrink-0 mt-1">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center text-white text-sm mr-2 flex-shrink-0 mt-1 shadow-sm">
           🌾
         </div>
       )}
       <div
-        className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+        className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap shadow-sm ${
           isUser
-            ? "bg-emerald-600 text-white rounded-br-sm"
-            : "bg-white border border-gray-100 shadow-sm text-gray-800 rounded-bl-sm"
+            ? "bg-gradient-to-br from-green-600 to-green-700 text-white rounded-br-sm"
+            : "bg-white border border-green-100 text-gray-700 rounded-bl-sm"
         }`}
       >
         {msg.text}
@@ -136,7 +137,7 @@ const Bubble = ({ msg }) => {
         )}
       </div>
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm ml-2 flex-shrink-0 mt-1">
+        <div className="w-8 h-8 rounded-full bg-green-100 border border-green-200 flex items-center justify-center text-sm ml-2 flex-shrink-0 mt-1">
           👨‍🌾
         </div>
       )}
@@ -145,7 +146,6 @@ const Bubble = ({ msg }) => {
 };
 
 const ChatAssistant = () => {
-  // ✅ Fixed: useLanguage called properly, no try/catch needed
   const { language = "en" } = useLanguage();
 
   const [messages, setMessages] = useState([
@@ -186,7 +186,7 @@ const ChatAssistant = () => {
     try {
       const reply = await askGemini(text, messages, language);
       setMessages((prev) => [...prev, { from: "bot", text: reply }]);
-    } catch (error) { // ✅ Fixed: renamed from 'err' and used
+    } catch (error) {
       setMessages((prev) => [
         ...prev,
         {
@@ -257,133 +257,139 @@ const ChatAssistant = () => {
   }[language] || "Online • Gemini AI";
 
   return (
-    <div className="flex flex-col h-[calc(100vh-80px)] max-w-2xl mx-auto px-3 pb-4">
-      {/* Header */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-4 py-3 mb-3 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-xl">
-          🌾
-        </div>
-        <div>
-          <h1 className="text-base font-bold text-gray-900">Sathi — AI Farming Assistant</h1>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            <p className="text-xs text-emerald-600 font-medium">{onlineLabel}</p>
-          </div>
-        </div>
-      </div>
+    /* ✅ pt-8 (32px) — navbar se proper gap */
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 pt-8 pb-6 px-4">
+      <div className="max-w-2xl mx-auto flex flex-col" style={{ height: "calc(100vh - 116px)" }}>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-1 py-2 space-y-1">
-        {messages.map((msg, idx) => (
-          <Bubble key={idx} msg={msg} />
-        ))}
-        {loading && (
-          <div className="flex justify-start mb-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-sm mr-2 flex-shrink-0 mt-1">
-              🌾
+        {/* ── Chat Header card ── */}
+        <div className="bg-white rounded-2xl shadow-md border border-green-100 px-5 py-4 mb-4 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-2xl shadow-sm">
+            🌾
+          </div>
+          <div className="flex-1">
+            <h1 className="text-lg font-bold text-gray-800">Sathi — AI Farming Assistant</h1>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <p className="text-xs text-green-600 font-medium">{onlineLabel}</p>
             </div>
-            <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-bl-sm">
-              <TypingDots />
+          </div>
+          <span className="hidden sm:block text-xs text-gray-400 italic">Kisan ka Sathi</span>
+        </div>
+
+        {/* ── Messages area ── */}
+        <div className="flex-1 overflow-y-auto bg-white rounded-2xl shadow-md border border-green-100 px-4 py-4 mb-4">
+          {messages.map((msg, idx) => (
+            <Bubble key={idx} msg={msg} />
+          ))}
+          {loading && (
+            <div className="flex justify-start mb-3">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center text-white text-sm mr-2 flex-shrink-0 mt-1 shadow-sm">
+                🌾
+              </div>
+              <div className="bg-white border border-green-100 shadow-sm rounded-2xl rounded-bl-sm">
+                <TypingDots />
+              </div>
+            </div>
+          )}
+          <div ref={bottomRef} />
+        </div>
+
+        {/* ── Quick Suggestions ── */}
+        {showSuggestions && (
+          <div className="mb-3 px-1">
+            <p className="text-xs text-gray-400 mb-2 font-medium">
+              {language === "hi" ? "जल्दी पूछें:" :
+               language === "ta" ? "விரைவு கேள்விகள்:" :
+               language === "te" ? "త్వరిత ప్రశ్నలు:" :
+               language === "mr" ? "लवकर विचारा:" :
+               language === "bn" ? "দ্রুত প্রশ্ন:" :
+               language === "pa" ? "ਜਲਦੀ ਪੁੱਛੋ:" : "Quick questions:"}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {suggestions.map((s, i) => (
+                <button
+                  key={i}
+                  onClick={() => sendMessage(s)}
+                  className="text-xs bg-white border border-green-300 text-green-700 font-medium px-3 py-1.5 rounded-full hover:bg-green-50 hover:border-green-400 transition-all shadow-sm"
+                >
+                  {s}
+                </button>
+              ))}
             </div>
           </div>
         )}
-        <div ref={bottomRef} />
-      </div>
 
-      {/* Quick Suggestions */}
-      {showSuggestions && (
-        <div className="mb-3">
-          <p className="text-xs text-gray-400 mb-2 px-1">
-            {language === "hi" ? "जल्दी पूछें:" :
-             language === "ta" ? "விரைவு கேள்விகள்:" :
-             language === "te" ? "త్వరిత ప్రశ్నలు:" :
-             language === "mr" ? "लवकर विचारा:" :
-             language === "bn" ? "দ্রুত প্রশ্ন:" :
-             language === "pa" ? "ਜਲਦੀ ਪੁੱਛੋ:" : "Quick questions:"}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((s, i) => (
-              <button
-                key={i}
-                onClick={() => sendMessage(s)}
-                className="text-xs bg-white border border-emerald-200 text-emerald-700 px-3 py-1.5 rounded-full hover:bg-emerald-50 transition-colors shadow-sm"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+        {/* ── Input Bar ── */}
+        <div className="bg-white rounded-2xl border border-green-200 shadow-md flex items-end gap-2 px-4 py-3">
+          <textarea
+            ref={textareaRef}
+            rows={1}
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              e.target.style.height = "auto";
+              e.target.style.height = Math.min(e.target.scrollHeight, 100) + "px";
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
+            placeholder={placeholder}
+            className="flex-1 resize-none outline-none text-sm text-gray-700 placeholder-gray-400 leading-relaxed"
+            style={{ minHeight: "24px", maxHeight: "100px" }}
+            disabled={loading}
+          />
 
-      {/* Input Bar */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm flex items-end gap-2 px-3 py-2">
-        <textarea
-          ref={textareaRef}
-          rows={1}
-          value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-            e.target.style.height = "auto";
-            e.target.style.height = Math.min(e.target.scrollHeight, 100) + "px";
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              sendMessage();
-            }
-          }}
-          placeholder={placeholder}
-          className="flex-1 resize-none outline-none text-sm text-gray-800 placeholder-gray-400 leading-relaxed"
-          style={{ minHeight: "24px", maxHeight: "100px" }}
-          disabled={loading}
-        />
+          {voiceOk && (
+            <button
+              type="button"
+              onClick={toggleVoice}
+              title={listening ? "Stop listening" : "Voice input"}
+              className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+                listening
+                  ? "bg-red-500 text-white animate-pulse shadow-lg"
+                  : "bg-green-50 text-green-600 hover:bg-green-100 border border-green-200"
+              }`}
+            >
+              {listening ? (
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <rect x="6" y="6" width="12" height="12" rx="2" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              )}
+            </button>
+          )}
 
-        {voiceOk && (
           <button
             type="button"
-            onClick={toggleVoice}
-            title={listening ? "Stop listening" : "Voice input"}
-            className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all ${
-              listening
-                ? "bg-red-500 text-white animate-pulse shadow-lg"
-                : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
-            }`}
+            onClick={() => sendMessage()}
+            disabled={loading || !input.trim()}
+            className="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-green-600 to-green-700 disabled:from-gray-300 disabled:to-gray-300 text-white rounded-full flex items-center justify-center hover:from-green-700 hover:to-green-800 transition-all shadow-sm"
           >
-            {listening ? (
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <rect x="6" y="6" width="12" height="12" rx="2" />
-              </svg>
+            {loading ? (
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             )}
           </button>
-        )}
+        </div>
 
-        <button
-          type="button"
-          onClick={() => sendMessage()}
-          disabled={loading || !input.trim()}
-          className="flex-shrink-0 w-9 h-9 bg-emerald-600 disabled:bg-gray-300 text-white rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors"
-        >
-          {loading ? (
-            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-          )}
-        </button>
+        {/* ── Footer note ── */}
+        <p className="text-[10px] text-gray-400 text-center mt-2">
+          {language === "hi"
+            ? "साथी Gemini AI पर चलता है — गंभीर समस्या के लिए Krishi Vigyan Kendra से मिलें।"
+            : "Sathi runs on Gemini AI — for serious issues, consult your local Krishi Vigyan Kendra."}
+        </p>
       </div>
-
-      <p className="text-[10px] text-gray-400 text-center mt-2">
-        {language === "hi"
-          ? "साथी Gemini AI पर चलता है — गंभीर समस्या के लिए Krishi Vigyan Kendra से मिलें।"
-          : "Sathi runs on Gemini AI — for serious issues, consult your local Krishi Vigyan Kendra."}
-      </p>
     </div>
   );
 };
