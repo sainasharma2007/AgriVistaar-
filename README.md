@@ -1,195 +1,152 @@
 # 🌾 AgriVistaar — Kisan ka Sathi
 
-> AI-powered precision agriculture platform for Indian farmers — drone analytics, crop health monitoring, mandi price signals, and yield prediction.
+> **AI-powered Precision Agriculture Platform for Indian Farmers**
+
+AgriVistaar is a full-stack MERN application designed to empower farmers with intelligent farming solutions. The platform combines AI-driven crop analysis, drone-assisted field monitoring, live mandi price insights, multilingual support, and secure authentication to help farmers make informed decisions and improve agricultural productivity.
+
+> 🚧 **Project Status:** Actively under development. New features and improvements are being added continuously.
 
 ---
 
-## 🚀 Tech Stack
+## 🌐 Live Demo
 
-| Layer | Technology |
-|---|---|
+🚧 Deployment in progress.
+
+---
+
+## ✨ Key Features
+
+- 🛸 **Drone-Based Crop Monitoring**
+  - Upload drone imagery for crop inspection and health analysis.
+
+- 🌱 **Field Management**
+  - Create and manage multiple farm fields with crop details.
+
+- 🤖 **AI Crop Analysis**
+  - Detect crop stress, pests, and diseases using AI.
+
+- 📈 **Live Mandi Price Intelligence**
+  - View mandi prices and receive buy/sell recommendations.
+
+- 🌦️ **Weather Insights**
+  - Real-time weather updates for better farming decisions.
+
+- 💬 **Ask Sathi (Gemini AI)**
+  - AI farming assistant supporting multiple regional languages.
+
+- 🔐 **Secure Authentication**
+  - Login and user management powered by Auth0.
+
+- 🌍 **Multi-language Support**
+  - English
+  - Hindi
+  - Marathi
+  - Tamil
+  - Telugu
+  - Bengali
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
 | Frontend | React (Vite), Tailwind CSS |
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas |
-| Authentication | Auth0 (SPA + JWT) |
-| AI Assistant | Google Gemini API |
+| Authentication | Auth0 |
+| AI | Google Gemini API |
+| Machine Learning | Python, Scikit-Learn |
 | Hosting | Antigravity |
-| Drone Analysis | Custom drone inspection pipeline |
 
 ---
 
-## ✨ Features
+## 🏗️ System Architecture
 
-- 🛸 **Drone Upload & Scan** — Upload drone imagery for crop health analysis
-- 🌱 **Field Management** — Add, track and manage multiple farm fields
-- 📊 **AI Crop Analysis** — Detect pest, stress and disease early
-- 📈 **Mandi Price Signal** — Live mandi prices with buy/sell recommendations
-- 🌦️ **Weather Integration** — Real-time weather for farm planning
-- 🤖 **Ask Sathi (Gemini AI)** — AI chat assistant powered by Google Gemini API for farming queries
-- 🔐 **Auth0 Authentication** — Secure login, signup and social login support
-- 🌐 **Multi-language** — English, Hindi, Marathi, Tamil, Bengali, Telugu
+The diagram below illustrates the overall architecture and data flow of AgriVistaar.
 
----
-
-## 📁 Project Structure
-
-```
-farmer-drone-app/
-├── backend/                  # Node.js + Express API
-│   ├── config/               # DB config
-│   ├── controllers/          # Route controllers
-│   ├── middleware/           # Auth middleware (Auth0 JWT)
-│   ├── models/               # Mongoose models
-│   ├── routes/               # API routes
-│   ├── scripts/              # Migration & seed scripts
-│   └── server.js
-│
-├── farmer-drone-client/      # React frontend (Vite)
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/       # Navbar, ChatFloat, etc.
-│   │   ├── context/          # Language context
-│   │   ├── pages/            # All page components
-│   │   ├── api.js            # Axios instance
-│   │   └── App.jsx
-│   └── index.html
-│
-└── README.md
-```
-
----
-
-## ⚙️ Setup & Installation
-
-### Prerequisites
-- Node.js v18+
-- MongoDB Atlas account
-- Auth0 account
-- Google Gemini API key
-
-### 1. Clone the repo
-```bash
-git clone https://github.com/YOUR_USERNAME/agrivistaar.git
-cd agrivistaar
-```
-
-### 2. Backend setup
-```bash
-cd backend
-npm install
-```
-
-Create `.env` file in `/backend`:
-```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=5000
-FLASK_URL=http://localhost:6000
-AUTH0_DOMAIN=your-tenant.us.auth0.com
-AUTH0_AUDIENCE=https://your-api-identifier
-AUTH0_CONNECTION_ID=your_connection_id
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-Start backend:
-```bash
-npm run dev
-```
-
-### 3. Frontend setup
-```bash
-cd farmer-drone-client
-npm install
-```
-
-Create `.env` file in `/farmer-drone-client`:
-```env
-VITE_API_URL=http://localhost:5000
-VITE_AUTH0_DOMAIN=your-tenant.us.auth0.com
-VITE_AUTH0_CLIENT_ID=your_client_id
-VITE_AUTH0_AUDIENCE=https://your-api-identifier
-```
-
-Start frontend:
-```bash
-npm run dev
-```
-
-### 4. Open in browser
-```
-http://localhost:5173
-```
-
----
-
-## 🔐 Auth0 Configuration
-
-1. Create a **Single Page Application** in Auth0
-2. Set Allowed Callback URLs: `http://localhost:5173`
-3. Set Allowed Logout URLs: `http://localhost:5173`
-4. Set Allowed Web Origins: `http://localhost:5173`
-5. Create an **API** with identifier `https://api.agrivistaar.com`
-6. Authorize your SPA app to access the API
-
----
-
-## 🤖 Gemini AI Integration
-
-AgriVistaar uses **Google Gemini API** to power the **Ask Sathi** chat assistant. Farmers can ask questions in their local language about:
-- Crop diseases and treatments
-- Weather-based farming decisions
-- Mandi price strategies
-- General farming advice
-
----
-
-## ☁️ Deployment
-
-This project is hosted on **Antigravity**.
-
----
-
-## 🗄️ Database Models
-
-- **User** — farmer profile with Auth0 linking
-- **Field** — farm field with crop details
-- **DroneJob** — drone scan requests
-- **DroneInspection** — scan results and AI analysis
-- **AiAnalysis** — crop health AI reports
-
----
-
-## 🌐 API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/auth/sync` | Sync Auth0 user to MongoDB |
-| GET | `/api/fields/my` | Get user's fields |
-| POST | `/api/fields` | Add new field |
-| GET | `/api/drone-jobs/my` | Get user's drone jobs |
-| POST | `/api/drone-jobs` | Request drone scan |
-| GET | `/api/mandi/prices` | Get live mandi prices |
-| POST | `/api/chat` | Ask Sathi — Gemini AI chat |
+![Architecture](architecture/architecture.png)
 
 ---
 
 ## 📸 Screenshots
 
-<img width="1911" height="902" alt="image" src="https://github.com/user-attachments/assets/0faed568-f51d-4ae5-a4bc-9ad6e2206039" />
-<img width="1894" height="949" alt="image" src="https://github.com/user-attachments/assets/91db07e9-85b7-4fd0-8548-217ce27c2b26" />
-<img width="1906" height="902" alt="image" src="https://github.com/user-attachments/assets/5703554b-ba10-4d9c-af96-d0286e195e28" />
+### 🌾 Landing Page
+![Landing Page](assets/01-landing-page.png)
 
+### 🔐 Secure Authentication
+![Authentication](assets/02-authentication-login.png)
 
+### 📊 Farmer Dashboard
+![Dashboard](assets/03-farmer-dashboard.png)
 
+### 📈 Farm Overview & Market Intelligence
+![Overview](assets/04-dashboard-overview.png)
 
-## 👨‍💻 Built by
+### 🚁 Drone Scan Request
+![Drone Scan](assets/05-drone-scan-request.png)
 
-**Team AgriVistaar** — ABES IT, Ghaziabad
+### 🌱 Field Details & Scan History
+![Field Details](assets/06-field-details.png)
+
+### 🤖 AI Crop Health & Fraud Analysis
+![AI Report](assets/07-ai-crop-health-report.png)
+
+### 🌐 Multilingual AI Farming Assistant
+![AI Assistant](assets/08-multilingual-ai-assistant.png)
+
+### 🏛️ Government Schemes Center
+![Schemes](assets/09-government-schemes-center.png)
+
+## 🚀 Core Modules
+
+- Farmer Dashboard
+- Drone Inspection
+- Crop Health Monitoring
+- AI Chat Assistant
+- Field Management
+- Live Mandi Analytics
+- Weather Monitoring
+- Authentication & User Profiles
+
+---
+
+## 💡 Why AgriVistaar?
+
+AgriVistaar bridges the gap between modern agricultural technology and everyday farming by integrating AI, drone analytics, and real-time market intelligence into a single platform. It enables farmers to make smarter decisions, improve crop productivity, and maximize profitability through accessible, technology-driven solutions.
+
+---
+
+## 📌 Current Development
+
+The project is actively evolving with upcoming enhancements including:
+
+- 📱 Progressive Web App (PWA)
+- 📊 Advanced analytics dashboard
+- 📍 GPS-based field visualization
+- 🚁 Enhanced drone inspection workflows
+- 📈 Improved predictive farming insights
+
+---
+
+## 👨‍💻 Team
+
+**Team AgriVistaar**  
+ABES Institute of Technology, Ghaziabad
 
 | Name | Role |
-|---|---|
-| Saina Sharma | MERN Stack Developer |
-| Kartike Rohila | MERN Stack Developer and AI Model |
-| Rishika Garg | AI Model |
-| Kanav Agarwal | Backend Developer |
+|------|------|
+| **Saina Sharma** | MERN Stack Developer |
+| **Kartike Rohila** | MERN Stack Developer & AI Engineer |
+| **Rishika Garg** | AI/ML Developer |
+| **Kanav Agarwal** | Backend Developer |
 
-Built with ❤️ for Indian farmers 🌾
+---
+
+## 📌 Note
+
+This repository represents the ongoing development of AgriVistaar. While the project is publicly available, several features are still under active development and continuous improvement.
+
+---
+
+Built with ❤️ to empower Indian farmers through technology.
