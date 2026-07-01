@@ -168,7 +168,7 @@ ABES Institute of Technology, Ghaziabad
 
 | Name | Role |
 |------|------|
-| **Saina Sharma** | MERN Stack Developer |
+| **Saina Sharma** | Team Lead and MERN Stack Developer |
 | **Kartike Rohila** | MERN Stack Developer & AI Engineer |
 | **Rishika Garg** | AI/ML Developer |
 | **Kanav Agarwal** | Backend Developer |
