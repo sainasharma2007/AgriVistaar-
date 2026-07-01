@@ -68,33 +68,29 @@ The diagram below illustrates the overall architecture and data flow of AgriVist
 ```mermaid
 flowchart LR
 
-    U[👨‍🌾 Farmer] --> W[🌐 React + Vite Frontend]
+A[👨‍🌾 Farmer]
 
-    W --> A[🔐 Firebase Authentication]
-    W --> B[⚡ Node.js + Express API]
-    W --> G[🤖 Gemini AI Assistant]
+A --> B[🌐 React + Vite Frontend]
 
-    B --> D[(🗄️ PostgreSQL)]
-    B --> E[🚁 Drone Scan Service]
-    B --> F[🧠 ML Crop Health Model]
-    B --> H[📊 Market Price Engine]
-    B --> I[🏛️ Government Schemes Engine]
+B --> C[🔐 Firebase Authentication]
+B --> D[⚙️ Node.js + Express Backend]
 
-    E --> F
+D --> E[🚁 Drone Scan Module]
+D --> F[🧠 AI/ML Crop Health Model]
+D --> G[🤖 Gemini AI (AgriBuddy)]
+D --> H[📈 Market Intelligence]
+D --> I[🏛️ Government Schemes]
 
-    F --> R[📄 Crop Health Report]
-    F --> X[🛡️ Fraud Risk Detection]
+F --> J[📄 Crop Health Report]
+F --> K[🛡️ Fraud Analysis]
 
-    D --> B
-    B --> W
+J --> B
+K --> B
+H --> B
+I --> B
+G --> B
 
-    G --> W
-    H --> W
-    I --> W
-    R --> W
-    X --> W
-
-    W --> O[📱 Farmer Dashboard]
+B --> A
 ```
 
 ## 📸 Screenshots
