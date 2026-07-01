@@ -65,38 +65,66 @@ AgriVistaar is a full-stack MERN application designed to empower farmers with in
 
 The diagram below illustrates the overall architecture and data flow of AgriVistaar.
 
-![Architecture](architecture/architecture.png)
+```mermaid
+flowchart LR
 
----
+    U[👨‍🌾 Farmer] --> W[🌐 React + Vite Frontend]
+
+    W --> A[🔐 Firebase Authentication]
+    W --> B[⚡ Node.js + Express API]
+    W --> G[🤖 Gemini AI Assistant]
+
+    B --> D[(🗄️ PostgreSQL)]
+    B --> E[🚁 Drone Scan Service]
+    B --> F[🧠 ML Crop Health Model]
+    B --> H[📊 Market Price Engine]
+    B --> I[🏛️ Government Schemes Engine]
+
+    E --> F
+
+    F --> R[📄 Crop Health Report]
+    F --> X[🛡️ Fraud Risk Detection]
+
+    D --> B
+    B --> W
+
+    G --> W
+    H --> W
+    I --> W
+    R --> W
+    X --> W
+
+    W --> O[📱 Farmer Dashboard]
+```
 
 ## 📸 Screenshots
 
 ### 🌾 Landing Page
-![Landing Page](assets/01-landing-page.png)
+![Landing Page](01-landing-page.png)
 
 ### 🔐 Secure Authentication
-![Authentication](assets/02-authentication-login.png)
+![Authentication](02-authentication-login.png)
 
 ### 📊 Farmer Dashboard
-![Dashboard](assets/03-farmer-dashboard.png)
+![Dashboard](03-farmer-dashboard.png)
 
 ### 📈 Farm Overview & Market Intelligence
-![Overview](assets/04-dashboard-overview.png)
+![Overview](04-dashboard-overview.png)
 
 ### 🚁 Drone Scan Request
-![Drone Scan](assets/05-drone-scan-request.png)
+![Drone Scan](05-drone-scan-request.png)
 
 ### 🌱 Field Details & Scan History
-![Field Details](assets/06-field-details.png)
+![Field Details](06-field-details.png)
 
 ### 🤖 AI Crop Health & Fraud Analysis
-![AI Report](assets/07-ai-crop-health-report.png)
+![AI Report](07-ai-crop-health-report.png)
 
-### 🌐 Multilingual AI Farming Assistant
-![AI Assistant](assets/08-multilingual-ai-assistant.png)
+### 🌐 Multilingual AI Assistant
+![AI Assistant](08-multilingual-ai-assistant.png)
 
 ### 🏛️ Government Schemes Center
-![Schemes](assets/09-government-schemes-center.png)
+![Schemes](09-government-schemes-center.png)
 
 ## 🚀 Core Modules
 
